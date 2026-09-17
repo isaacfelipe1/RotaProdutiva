@@ -1,108 +1,113 @@
 # RotaProdutiva
 
-API que conecta **pessoas em busca de qualificaÁ„o** a **volunt·rios dispostos a ensinar**, promovendo cursos de geraÁ„o de renda alinhados ao **ODS 4 (EducaÁ„o de Qualidade)** e **ODS 10 (ReduÁ„o das Desigualdades)**. Qualquer pessoa cadastrada pode se inscrever em cursos oferecidos por tutores/volunt·rios, com fluxo de aprovaÁ„o administrativa para cadastro de tutores. Desenvolvida em **.NET 8** seguindo os princÌpios de **Clean Architecture**.
+API que conecta **pessoas em busca de qualifica√ß√£o** a **volunt√°rios dispostos a ensinar**, promovendo cursos de gera√ß√£o de renda alinhados ao **ODS 4 (Educa√ß√£o de Qualidade)** e **ODS 10 (Redu√ß√£o das Desigualdades)**. Qualquer pessoa cadastrada pode se inscrever em cursos oferecidos por tutores/volunt√°rios, com fluxo de aprova√ß√£o administrativa para cadastro de tutores. Desenvolvida em **.NET 8** seguindo os princ√≠pios de **Clean Architecture**.
 
-## ?? Arquitetura
+## üèóÔ∏è Arquitetura
 
-O projeto È dividido em camadas, cada uma em seu prÛprio projeto:
+O projeto √© dividido em camadas, cada uma em seu pr√≥prio projeto:
 
-| Projeto | Responsabilidade |
-|---|---|
-| `RotaProdutiva.Domain` | Entidades, enums, exceÁıes de domÌnio e interfaces de repositÛrio (sem dependÍncias externas) |
-| `RotaProdutiva.Application` | Regras de negÛcio, serviÁos, DTOs e interfaces de aplicaÁ„o |
-| `RotaProdutiva.Infrastructure` | ImplementaÁ„o de repositÛrios, `DbContext` (EF Core), autenticaÁ„o/hash de senha e migrations |
-| `RotaProdutiva.API` | Controllers REST, configuraÁ„o de autenticaÁ„o JWT, Swagger e composiÁ„o da aplicaÁ„o |
-| `RotaProdutiva.Tests` | Testes automatizados |
+| Projeto                        | Responsabilidade                                                                              |
+| ------------------------------ | --------------------------------------------------------------------------------------------- |
+| `RotaProdutiva.Domain`         | Entidades, enums, exce√ß√µes de dom√≠nio e interfaces de reposit√≥rio (sem depend√™ncias externas) |
+| `RotaProdutiva.Application`    | Regras de neg√≥cio, servi√ßos, DTOs e interfaces de aplica√ß√£o                                   |
+| `RotaProdutiva.Infrastructure` | Implementa√ß√£o de reposit√≥rios, `DbContext` (EF Core), autentica√ß√£o/hash de senha e migrations |
+| `RotaProdutiva.API`            | Controllers REST, configura√ß√£o de autentica√ß√£o JWT, Swagger e composi√ß√£o da aplica√ß√£o         |
+| `RotaProdutiva.Tests`          | Testes automatizados                                                                          |
 
-## ?? Tecnologias
+## üõ†Ô∏è Tecnologias
 
 - .NET 8 / ASP.NET Core Web API
 - Entity Framework Core (PostgreSQL)
-- AutenticaÁ„o JWT Bearer
+- Autentica√ß√£o JWT Bearer
 - Swagger / OpenAPI
 
-## ?? Perfis de usu·rio
+## üë• Perfis de usu√°rio
 
-- **Jovem**: perfil padr„o de quem busca se qualificar; pode se inscrever em cursos.
-- **Tutor**: volunt·rio que pode criar e gerenciar cursos, mas depende de **aprovaÁ„o de um administrador** antes de conseguir publicar conte˙do. Tutores tambÈm podem se inscrever em cursos de outros tutores (exceto nos prÛprios cursos que criaram).
-- **Admin**: aprova ou rejeita solicitaÁıes de tutores e tem acesso total ‡ plataforma.
+- **Jovem**: perfil padr√£o de quem busca se qualificar; pode se inscrever em cursos.
+- **Tutor**: volunt√°rio que pode criar e gerenciar cursos, mas depende de **aprova√ß√£o de um administrador** antes de conseguir publicar conte√∫do. Tutores tamb√©m podem se inscrever em cursos de outros tutores (exceto nos pr√≥prios cursos que criaram).
+- **Admin**: aprova ou rejeita solicita√ß√µes de tutores e tem acesso total √† plataforma.
 
-> ?? A inscriÁ„o em cursos È **p˙blica**: n„o È necess·rio estar autenticado ou possuir cadastro na plataforma para se inscrever. Basta informar nome, e-mail e WhatsApp para contato.
+> ‚ÑπÔ∏è A inscri√ß√£o em cursos √© **p√∫blica**: n√£o √© necess√°rio estar autenticado ou possuir cadastro na plataforma para se inscrever. Basta informar nome, e-mail e WhatsApp para contato.
 
-### Fluxo de aprovaÁ„o de Tutor
+### Fluxo de aprova√ß√£o de Tutor
 
-1. Ao se registrar como `Tutor`, o usu·rio È criado com `StatusAprovacao = Pendente`.
-2. Um `Admin` consulta a lista de tutores pendentes e aprova ou rejeita a solicitaÁ„o.
-3. Um tutor **rejeitado** n„o consegue fazer login.
-4. Um tutor **pendente** consegue fazer login, mas n„o pode criar cursos atÈ ser aprovado.
+1. Ao se registrar como `Tutor`, o usu√°rio √© criado com `StatusAprovacao = Pendente`.
+2. Um `Admin` consulta a lista de tutores pendentes e aprova ou rejeita a solicita√ß√£o.
+3. Um tutor **rejeitado** n√£o consegue fazer login.
+4. Um tutor **pendente** consegue fazer login, mas n√£o pode criar cursos at√© ser aprovado.
 5. Somente tutores com `StatusAprovacao = Aprovado` (ou administradores) podem criar cursos.
 
-## ?? AutenticaÁ„o
+## üîê Autentica√ß√£o
 
-A API utiliza autenticaÁ„o via **JWT Bearer**. ApÛs login/registro, um token È retornado e deve ser enviado no header:
+A API utiliza autentica√ß√£o via **JWT Bearer**. Ap√≥s login/registro, um token √© retornado e deve ser enviado no header:
 
 ```
 Authorization: Bearer {seu token}
 ```
 
-## ?? Principais Endpoints
+## üìã Principais Endpoints
 
 ### Auth (`/api/auth`)
-| MÈtodo | Rota | DescriÁ„o | Acesso |
-|---|---|---|---|
-| POST | `/api/auth/registrar` | Registra um novo usu·rio (Jovem, Tutor ou Admin) | P˙blico |
-| POST | `/api/auth/login` | Autentica o usu·rio e retorna o token JWT | P˙blico |
+
+| M√©todo | Rota                  | Descri√ß√£o                                        | Acesso  |
+| ------ | --------------------- | ------------------------------------------------ | ------- |
+| POST   | `/api/auth/registrar` | Registra um novo usu√°rio (Jovem, Tutor ou Admin) | P√∫blico |
+| POST   | `/api/auth/login`     | Autentica o usu√°rio e retorna o token JWT        | P√∫blico |
 
 ### Cursos (`/api/cursos`)
-| MÈtodo | Rota | DescriÁ„o | Acesso |
-|---|---|---|---|
-| GET | `/api/cursos` | Lista todos os cursos | P˙blico |
-| GET | `/api/cursos/{id}` | ObtÈm um curso por Id | P˙blico |
-| GET | `/api/cursos/tutor/{tutorId}` | Lista cursos de um tutor | P˙blico |
-| POST | `/api/cursos` | Cria um novo curso | Tutor (aprovado) ou Admin |
 
-Ao criar um curso, alÈm de `Titulo` e `Descricao`, È necess·rio informar:
+| M√©todo | Rota                          | Descri√ß√£o                | Acesso                    |
+| ------ | ----------------------------- | ------------------------ | ------------------------- |
+| GET    | `/api/cursos`                 | Lista todos os cursos    | P√∫blico                   |
+| GET    | `/api/cursos/{id}`            | Obt√©m um curso por Id    | P√∫blico                   |
+| GET    | `/api/cursos/tutor/{tutorId}` | Lista cursos de um tutor | P√∫blico                   |
+| POST   | `/api/cursos`                 | Cria um novo curso       | Tutor (aprovado) ou Admin |
 
-| Campo | Tipo | DescriÁ„o |
-|---|---|---|
-| `DataInicio` | `DateTime` | Data de inÌcio do curso (deve ser futura) |
-| `CargaHoraria` | `int` | Carga hor·ria total, em horas (maior que zero) |
-| `Vagas` | `int` | N˙mero de vagas disponÌveis (maior que zero) |
-| `Modalidade` | `string` | `Presencial` ou `Online` (`ModalidadeCurso`) |
-| `Local` | `string?` | ObrigatÛrio quando `Modalidade = Presencial`; ignorado quando `Online` |
+Ao criar um curso, al√©m de `Titulo` e `Descricao`, √© necess√°rio informar:
 
-Cada curso tambÈm expıe `VagasDisponiveis`, calculado como `Vagas` menos o n˙mero de inscriÁıes ativas/concluÌdas (inscriÁıes canceladas n„o contam).
+| Campo          | Tipo       | Descri√ß√£o                                                              |
+| -------------- | ---------- | ---------------------------------------------------------------------- |
+| `DataInicio`   | `DateTime` | Data de in√≠cio do curso (deve ser futura)                              |
+| `CargaHoraria` | `int`      | Carga hor√°ria total, em horas (maior que zero)                         |
+| `Vagas`        | `int`      | N√∫mero de vagas dispon√≠veis (maior que zero)                           |
+| `Modalidade`   | `string`   | `Presencial` ou `Online` (`ModalidadeCurso`)                           |
+| `Local`        | `string?`  | Obrigat√≥rio quando `Modalidade = Presencial`; ignorado quando `Online` |
 
-### InscriÁıes (`/api/inscricoes`)
-| MÈtodo | Rota | DescriÁ„o | Acesso |
-|---|---|---|---|
-| POST | `/api/inscricoes` | Inscreve uma pessoa (nome, email, whatsapp) em um curso | P˙blico |
-| GET | `/api/inscricoes/curso/{cursoId}` | Lista inscritos de um curso | Tutor, Admin |
+Cada curso tamb√©m exp√µe `VagasDisponiveis`, calculado como `Vagas` menos o n√∫mero de inscri√ß√µes ativas/conclu√≠das (inscri√ß√µes canceladas n√£o contam).
 
-Ao se inscrever, È necess·rio informar:
+### Inscri√ß√µes (`/api/inscricoes`)
 
-| Campo | Tipo | DescriÁ„o |
-|---|---|---|
-| `CursoId` | `Guid` | Id do curso a se inscrever |
-| `Nome` | `string` | Nome completo do interessado |
-| `Email` | `string` | E-mail para contato |
-| `WhatsApp` | `string` | N˙mero de WhatsApp para contato |
+| M√©todo | Rota                              | Descri√ß√£o                                               | Acesso       |
+| ------ | --------------------------------- | ------------------------------------------------------- | ------------ |
+| POST   | `/api/inscricoes`                 | Inscreve uma pessoa (nome, email, whatsapp) em um curso | P√∫blico      |
+| GET    | `/api/inscricoes/curso/{cursoId}` | Lista inscritos de um curso                             | Tutor, Admin |
 
-Regras de inscriÁ„o (`InscricaoService.CriarAsync`):
+Ao se inscrever, √© necess√°rio informar:
+
+| Campo      | Tipo     | Descri√ß√£o                       |
+| ---------- | -------- | ------------------------------- |
+| `CursoId`  | `Guid`   | Id do curso a se inscrever      |
+| `Nome`     | `string` | Nome completo do interessado    |
+| `Email`    | `string` | E-mail para contato             |
+| `WhatsApp` | `string` | N√∫mero de WhatsApp para contato |
+
+Regras de inscri√ß√£o (`InscricaoService.CriarAsync`):
+
 1. Curso deve existir.
-2. N„o pode haver inscriÁ„o ativa duplicada do mesmo e-mail no mesmo curso.
+2. N√£o pode haver inscri√ß√£o ativa duplicada do mesmo e-mail no mesmo curso.
 3. Deve haver `VagasDisponiveis > 0`.
 
 ### Admin (`/api/admin`)
-| MÈtodo | Rota | DescriÁ„o | Acesso |
-|---|---|---|---|
-| GET | `/api/admin/tutores/pendentes` | Lista tutores aguardando aprovaÁ„o | Admin |
-| POST | `/api/admin/tutores/{id}/aprovar` | Aprova o cadastro de um tutor | Admin |
-| POST | `/api/admin/tutores/{id}/rejeitar` | Rejeita o cadastro de um tutor | Admin |
 
-## ?? ConfiguraÁ„o
+| M√©todo | Rota                               | Descri√ß√£o                          | Acesso |
+| ------ | ---------------------------------- | ---------------------------------- | ------ |
+| GET    | `/api/admin/tutores/pendentes`     | Lista tutores aguardando aprova√ß√£o | Admin  |
+| POST   | `/api/admin/tutores/{id}/aprovar`  | Aprova o cadastro de um tutor      | Admin  |
+| POST   | `/api/admin/tutores/{id}/rejeitar` | Rejeita o cadastro de um tutor     | Admin  |
 
-As configuraÁıes ficam em `RotaProdutiva.API/appsettings.json`:
+## ‚öôÔ∏è Configura√ß√£o
+
+As configura√ß√µes ficam em `RotaProdutiva.API/appsettings.json`:
 
 ```json
 {
@@ -124,28 +129,29 @@ As configuraÁıes ficam em `RotaProdutiva.API/appsettings.json`:
 }
 ```
 
-> ?? Altere `JwtSettings:Chave` e as credenciais de `AdminSeed` antes de subir para produÁ„o.
+> ‚ö†Ô∏è Altere `JwtSettings:Chave` e as credenciais de `AdminSeed` antes de subir para produ√ß√£o.
 
-Ao iniciar, a aplicaÁ„o aplica as migrations do EF Core automaticamente e cria (via *seed*) um usu·rio administrador com base nas configuraÁıes de `AdminSeed`, caso ainda n„o exista.
+Ao iniciar, a aplica√ß√£o aplica as migrations do EF Core automaticamente e cria (via _seed_) um usu√°rio administrador com base nas configura√ß√µes de `AdminSeed`, caso ainda n√£o exista.
 
-## ?? Como executar
+## üöÄ Como executar
 
-### PrÈ-requisitos
+### Pr√©-requisitos
+
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- PostgreSQL em execuÁ„o (local ou container)
+- PostgreSQL em execu√ß√£o (local ou container)
 
 ### Passos
 
 1. Configure a `ConnectionStrings:DefaultConnection` em `appsettings.json` (ou `appsettings.Development.json`) apontando para o seu banco PostgreSQL.
-2. Restaure as dependÍncias e execute a API:
+2. Restaure as depend√™ncias e execute a API:
 
 ```powershell
 dotnet restore
 dotnet run --project RotaProdutiva.API
 ```
 
-3. As migrations ser„o aplicadas automaticamente ao iniciar.
-4. Acesse a documentaÁ„o interativa (Swagger) em:
+3. As migrations ser√£o aplicadas automaticamente ao iniciar.
+4. Acesse a documenta√ß√£o interativa (Swagger) em:
 
 ```
 https://localhost:{porta}/swagger
@@ -157,7 +163,7 @@ https://localhost:{porta}/swagger
 dotnet test
 ```
 
-## ??? Estrutura de pastas (resumo)
+## üìÅ Estrutura de pastas (resumo)
 
 ```
 RotaProdutiva.Domain/
@@ -178,5 +184,5 @@ RotaProdutiva.Infrastructure/
 
 RotaProdutiva.API/
   Controllers/      -> AuthController, CursosController, InscricoesController, AdminController
-  Program.cs         -> ComposiÁ„o da aplicaÁ„o, autenticaÁ„o JWT, seed de admin
+  Program.cs         -> Composi√ß√£o da aplica√ß√£o, autentica√ß√£o JWT, seed de admin
 ```
