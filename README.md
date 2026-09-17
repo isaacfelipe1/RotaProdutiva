@@ -186,3 +186,8 @@ RotaProdutiva.API/
   Controllers/      -> AuthController, CursosController, InscricoesController, AdminController
   Program.cs         -> Composição da aplicação, autenticação JWT, seed de admin
 ```
+
+## 👤 Autor
+
+Por: Isaac Felipe dos Santos Lima
+Email: ifdsl.lic20@uea.edu
