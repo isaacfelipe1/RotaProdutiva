@@ -2,7 +2,13 @@
 
 API que conecta **pessoas em busca de qualificação** a **voluntários dispostos a ensinar**, promovendo cursos de geração de renda alinhados ao **ODS 4 (Educação de Qualidade)** e **ODS 10 (Redução das Desigualdades)**. Qualquer pessoa cadastrada pode se inscrever em cursos oferecidos por tutores/voluntários, com fluxo de aprovação administrativa para cadastro de tutores. Desenvolvida em **.NET 8** seguindo os princípios de **Clean Architecture**.
 
-## 🏗️ Arquitetura
+## � Problema e Solução
+
+**Problema**: muitas pessoas não têm acesso a qualificação profissional gratuita para gerar renda, seja pela falta de recursos financeiros, seja pela ausência de espaços que conectem quem quer aprender a quem tem conhecimento para ensinar voluntariamente. Isso aprofunda desigualdades sociais e limita oportunidades de inclusão produtiva.
+
+**Solução**: o RotaProdutiva é uma plataforma que conecta pessoas em busca de qualificação a voluntários dispostos a ensinar, permitindo o cadastro de cursos gratuitos de geração de renda. Qualquer pessoa pode se inscrever nos cursos, enquanto voluntários (tutores) passam por um fluxo de aprovação administrativa antes de publicar conteúdo, garantindo qualidade e segurança na plataforma. A solução está alinhada ao **ODS 4 (Educação de Qualidade)** e ao **ODS 10 (Redução das Desigualdades)**.
+
+## �🏗️ Arquitetura
 
 O projeto é dividido em camadas, cada uma em seu próprio projeto:
 
