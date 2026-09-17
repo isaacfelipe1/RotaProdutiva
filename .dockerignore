@@ -1,0 +1,14 @@
+**/.vs
+**/.vscode
+**/bin
+**/obj
+**/[Dd]ebug
+**/[Rr]elease
+**/.git
+**/.gitignore
+**/*.user
+**/node_modules
+**/README.md
+**/*.md
+Dockerfile
+.dockerignore

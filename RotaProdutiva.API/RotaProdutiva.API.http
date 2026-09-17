@@ -1,0 +1,6 @@
+@RotaProdutiva.API_HostAddress = http://localhost:5268
+
+GET {{RotaProdutiva.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
