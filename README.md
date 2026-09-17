@@ -23,9 +23,11 @@ O projeto é dividido em camadas, cada uma em seu próprio projeto:
 
 ## 👥 Perfis de usuário
 
-- **Jovem**: perfil padrão de quem busca se qualificar; pode se inscrever em cursos.
+- **Jovem**: tipo de conta padrão para quem busca se qualificar. Apesar do nome, não há restrição de idade ou público — qualquer pessoa pode se cadastrar com esse perfil.
 - **Tutor**: voluntário que pode criar e gerenciar cursos, mas depende de **aprovação de um administrador** antes de conseguir publicar conteúdo. Tutores também podem se inscrever em cursos de outros tutores (exceto nos próprios cursos que criaram).
 - **Admin**: aprova ou rejeita solicitações de tutores e tem acesso total à plataforma.
+
+A inscrição em cursos não é restrita a um perfil: **qualquer pessoa**, cadastrada ou não na plataforma, pode se inscrever.
 
 > ℹ️ A inscrição em cursos é **pública**: não é necessário estar autenticado ou possuir cadastro na plataforma para se inscrever. Basta informar nome, e-mail e WhatsApp para contato.
 
