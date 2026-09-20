@@ -28,6 +28,13 @@ namespace RotaProdutiva.API
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "RotaProdutiva API", Version = "v1" });
 
+                var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                if (File.Exists(xmlPath))
+                {
+                    options.IncludeXmlComments(xmlPath);
+                }
+
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
