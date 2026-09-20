@@ -18,6 +18,13 @@ namespace RotaProdutiva.API.Controllers
             _adminService = adminService;
         }
 
+        /// <summary>
+        /// Obtém a lista de solicitações de tutores pendentes de aprovação.
+        /// </summary>
+        /// <returns>Lista de solicitações pendentes.</returns>
+        /// <response code="200">Solicitações retornadas com sucesso.</response>
+        /// <response code="401">Usuário não autenticado.</response>
+        /// <response code="403">Usuário sem permissão de administrador.</response>
         [HttpGet("tutores/pendentes")]
         [ProducesResponseType(typeof(IEnumerable<SolicitacaoTutorDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -28,6 +35,14 @@ namespace RotaProdutiva.API.Controllers
             return Ok(tutores);
         }
 
+        /// <summary>
+        /// Aprova a solicitação de um tutor.
+        /// </summary>
+        /// <param name="id">Identificador da solicitação/tutor.</param>
+        /// <response code="204">Tutor aprovado com sucesso.</response>
+        /// <response code="400">Solicitação inválida ou já processada.</response>
+        /// <response code="401">Usuário não autenticado.</response>
+        /// <response code="403">Usuário sem permissão de administrador.</response>
         [HttpPost("tutores/{id:guid}/aprovar")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -46,6 +61,14 @@ namespace RotaProdutiva.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Rejeita a solicitação de um tutor.
+        /// </summary>
+        /// <param name="id">Identificador da solicitação/tutor.</param>
+        /// <response code="204">Tutor rejeitado com sucesso.</response>
+        /// <response code="400">Solicitação inválida ou já processada.</response>
+        /// <response code="401">Usuário não autenticado.</response>
+        /// <response code="403">Usuário sem permissão de administrador.</response>
         [HttpPost("tutores/{id:guid}/rejeitar")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

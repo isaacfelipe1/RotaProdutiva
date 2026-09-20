@@ -18,6 +18,13 @@ namespace RotaProdutiva.API.Controllers
             _inscricaoService = inscricaoService;
         }
 
+        /// <summary>
+        /// Cria uma nova inscrição de um aluno em um curso.
+        /// </summary>
+        /// <param name="dto">Dados necessários para realizar a inscrição.</param>
+        /// <returns>Dados da inscrição criada.</returns>
+        /// <response code="200">Inscrição criada com sucesso.</response>
+        /// <response code="400">Dados inválidos ou inscrição já existente.</response>
         [HttpPost]
         [ProducesResponseType(typeof(InscricaoDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -34,6 +41,14 @@ namespace RotaProdutiva.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtém todas as inscrições de um curso específico.
+        /// </summary>
+        /// <param name="cursoId">Identificador do curso.</param>
+        /// <returns>Lista de inscrições do curso informado.</returns>
+        /// <response code="200">Inscrições retornadas com sucesso.</response>
+        /// <response code="401">Usuário não autenticado.</response>
+        /// <response code="403">Usuário sem permissão para acessar este recurso.</response>
         [HttpGet("curso/{cursoId:guid}")]
         [Authorize(Roles = "Tutor,Admin")]
         [ProducesResponseType(typeof(IEnumerable<InscricaoDto>), StatusCodes.Status200OK)]
