@@ -47,7 +47,7 @@ namespace RotaProdutiva.Tests.Application
         public async Task Deve_Lancar_Excecao_Quando_Usuario_Nao_E_Tutor()
         {
             var jovemId = Guid.NewGuid();
-            var jovem = new Usuario("João", "joao@example.com", "hash", "11999999999", TipoUsuario.Jovem);
+            var jovem = new Usuario("João", "joao@example.com", "hash", "11999999999", TipoUsuario.Aluno);
             var dto = new CriarCursoDto
             {
                 Titulo = "C# Avançado",

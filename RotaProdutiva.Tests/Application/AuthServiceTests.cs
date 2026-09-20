@@ -33,7 +33,7 @@ namespace RotaProdutiva.Tests.Application
                 Email = "joao@example.com",
                 Senha = "senha123",
                 WhatsApp = "11999999999",
-                Tipo = TipoUsuario.Jovem
+                Tipo = TipoUsuario.Aluno
             };
 
             _usuarioRepositoryMock.Setup(r => r.ExisteEmailAsync(dto.Email)).ReturnsAsync(false);
@@ -56,7 +56,7 @@ namespace RotaProdutiva.Tests.Application
                 Email = "joao@example.com",
                 Senha = "senha123",
                 WhatsApp = "11999999999",
-                Tipo = TipoUsuario.Jovem
+                Tipo = TipoUsuario.Aluno
             };
 
             _usuarioRepositoryMock.Setup(r => r.ExisteEmailAsync(dto.Email)).ReturnsAsync(true);
@@ -67,7 +67,7 @@ namespace RotaProdutiva.Tests.Application
         [Fact]
         public async Task Deve_Fazer_Login_Com_Sucesso()
         {
-            var usuario = new Usuario("João Silva", "joao@example.com", "hash_senha", "11999999999", TipoUsuario.Jovem);
+            var usuario = new Usuario("João Silva", "joao@example.com", "hash_senha", "11999999999", TipoUsuario.Aluno);
             var dto = new LoginDto { Email = "joao@example.com", Senha = "senha123" };
 
             _usuarioRepositoryMock.Setup(r => r.ObterPorEmailAsync(dto.Email)).ReturnsAsync(usuario);
@@ -92,7 +92,7 @@ namespace RotaProdutiva.Tests.Application
         [Fact]
         public async Task Deve_Lancar_Excecao_Quando_Senha_Incorreta()
         {
-            var usuario = new Usuario("João Silva", "joao@example.com", "hash_senha", "11999999999", TipoUsuario.Jovem);
+            var usuario = new Usuario("João Silva", "joao@example.com", "hash_senha", "11999999999", TipoUsuario.Aluno);
             var dto = new LoginDto { Email = "joao@example.com", Senha = "senhaerrada" };
 
             _usuarioRepositoryMock.Setup(r => r.ObterPorEmailAsync(dto.Email)).ReturnsAsync(usuario);

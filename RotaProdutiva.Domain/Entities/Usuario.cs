@@ -38,7 +38,7 @@ namespace RotaProdutiva.Domain.Entities
         }
 
         public bool EhTutor() => Tipo == TipoUsuario.Tutor;
-        public bool EhJovem() => Tipo == TipoUsuario.Jovem;
+        public bool EhAluno() => Tipo == TipoUsuario.Aluno;
         public bool EhAdmin() => Tipo == TipoUsuario.Admin;
         public bool EhTutorAprovado() => Tipo == TipoUsuario.Tutor && StatusAprovacao == StatusAprovacaoTutor.Aprovado;
 

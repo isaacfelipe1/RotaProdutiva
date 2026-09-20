@@ -29,7 +29,7 @@ O projeto é dividido em camadas, cada uma em seu próprio projeto:
 
 ## 👥 Perfis de usuário
 
-- **Jovem**: tipo de conta padrão para quem busca se qualificar. Apesar do nome, não há restrição de idade ou público — qualquer pessoa pode se cadastrar com esse perfil.
+- **Aluno**: tipo de conta padrão para quem busca se qualificar. Não há restrição de idade ou público — qualquer pessoa pode se cadastrar com esse perfil.
 - **Tutor**: voluntário que pode criar e gerenciar cursos, mas depende de **aprovação de um administrador** antes de conseguir publicar conteúdo. Tutores também podem se inscrever em cursos de outros tutores (exceto nos próprios cursos que criaram).
 - **Admin**: aprova ou rejeita solicitações de tutores e tem acesso total à plataforma.
 
@@ -59,7 +59,7 @@ Authorization: Bearer {seu token}
 
 | Método | Rota                  | Descrição                                        | Acesso  |
 | ------ | --------------------- | ------------------------------------------------ | ------- |
-| POST   | `/api/auth/registrar` | Registra um novo usuário (Jovem, Tutor ou Admin) | Público |
+| POST   | `/api/auth/registrar` | Registra um novo usuário (Aluno, Tutor ou Admin) | Público |
 | POST   | `/api/auth/login`     | Autentica o usuário e retorna o token JWT        | Público |
 
 ### Cursos (`/api/cursos`)
