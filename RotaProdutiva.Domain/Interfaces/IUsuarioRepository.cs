@@ -12,5 +12,6 @@ namespace RotaProdutiva.Domain.Interfaces
         Task<bool> ExisteEmailAsync(string email);
         Task<List<Usuario>> ObterTutoresPorStatusAsync(StatusAprovacaoTutor status);
         Task AtualizarAsync(Usuario usuario);
+        Task DeletarTutorAsync(Guid usuarioId);
     }
 }

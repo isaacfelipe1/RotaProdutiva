@@ -49,5 +49,16 @@ namespace RotaProdutiva.Application.Services
 
             await _usuarioRepository.AtualizarAsync(usuario);
         }
+
+        public async Task DeletarTutorAsync(Guid usuarioId)
+        {
+            var usuario = await _usuarioRepository.ObterPorIdAsync(usuarioId)
+                ?? throw new DomainException("Usuário não encontrado.");
+
+            if (!usuario.EhTutor())
+                throw new DomainException("Apenas tutores podem ser deletados.");
+
+            await _usuarioRepository.DeletarTutorAsync(usuarioId);
+        }
     }
 }

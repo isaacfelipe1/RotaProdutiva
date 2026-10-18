@@ -51,5 +51,18 @@ namespace RotaProdutiva.Infrastructure.Repositories
             _context.Usuarios.Update(usuario);
             await _context.SaveChangesAsync();
         }
+
+        public async Task DeletarTutorAsync(Guid usuarioId)
+        {
+            var usuario = await _context.Usuarios
+                .Include(u => u.Cursos)
+                .FirstOrDefaultAsync(u => u.Id == usuarioId);
+
+            if (usuario != null)
+            {
+                _context.Usuarios.Remove(usuario);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

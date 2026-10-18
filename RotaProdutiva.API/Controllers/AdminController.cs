@@ -86,5 +86,31 @@ namespace RotaProdutiva.API.Controllers
                 return BadRequest(new { mensagem = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Deleta um tutor e todos os seus cursos associados.
+        /// </summary>
+        /// <param name="id">Identificador do tutor.</param>
+        /// <response code="204">Tutor deletado com sucesso.</response>
+        /// <response code="400">Solicitação inválida ou tutor não encontrado.</response>
+        /// <response code="401">Usuário não autenticado.</response>
+        /// <response code="403">Usuário sem permissão de administrador.</response>
+        [HttpDelete("tutores/{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<IActionResult> DeletarTutor(Guid id)
+        {
+            try
+            {
+                await _adminService.DeletarTutorAsync(id);
+                return NoContent();
+            }
+            catch (DomainException ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
+        }
     }
 }

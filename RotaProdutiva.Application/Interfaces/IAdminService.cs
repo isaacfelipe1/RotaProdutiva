@@ -7,5 +7,6 @@ namespace RotaProdutiva.Application.Interfaces
         Task<List<SolicitacaoTutorDto>> ObterTutoresPendentesAsync();
         Task AprovarTutorAsync(Guid usuarioId);
         Task RejeitarTutorAsync(Guid usuarioId);
+        Task DeletarTutorAsync(Guid usuarioId);
     }
 }
