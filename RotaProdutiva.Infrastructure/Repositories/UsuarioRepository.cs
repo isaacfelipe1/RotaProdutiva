@@ -46,6 +46,14 @@ namespace RotaProdutiva.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<List<Usuario>> ObterTodosOsTutoresAsync()
+        {
+            return await _context.Usuarios
+                .Where(u => u.Tipo == TipoUsuario.Tutor)
+                .Include(u => u.Cursos)
+                .ToListAsync();
+        }
+
         public async Task AtualizarAsync(Usuario usuario)
         {
             _context.Usuarios.Update(usuario);

@@ -36,6 +36,23 @@ namespace RotaProdutiva.API.Controllers
         }
 
         /// <summary>
+        /// Obtém a lista de todos os tutores cadastrados no sistema.
+        /// </summary>
+        /// <returns>Lista de tutores cadastrados.</returns>
+        /// <response code="200">Tutores retornados com sucesso.</response>
+        /// <response code="401">Usuário não autenticado.</response>
+        /// <response code="403">Usuário sem permissão de administrador.</response>
+        [HttpGet("tutores")]
+        [ProducesResponseType(typeof(IEnumerable<TutorDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<IActionResult> ObterTodosTutores()
+        {
+            var tutores = await _adminService.ObterTodosOsTutoresAsync();
+            return Ok(tutores);
+        }
+
+        /// <summary>
         /// Aprova a solicitação de um tutor.
         /// </summary>
         /// <param name="id">Identificador da solicitação/tutor.</param>

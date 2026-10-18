@@ -1,4 +1,5 @@
 using RotaProdutiva.Application.DTOs.Admin;
+using RotaProdutiva.Application.DTOs.Admin;
 using RotaProdutiva.Application.Interfaces;
 using RotaProdutiva.Domain.Enums;
 using RotaProdutiva.Domain.Exceptions;
@@ -26,6 +27,22 @@ namespace RotaProdutiva.Application.Services
                 Email = t.Email,
                 WhatsApp = t.WhatsApp,
                 StatusAprovacao = t.StatusAprovacao.ToString(),
+                CriadoEm = t.CriadoEm
+            }).ToList();
+        }
+
+        public async Task<List<TutorDto>> ObterTodosOsTutoresAsync()
+        {
+            var tutores = await _usuarioRepository.ObterTodosOsTutoresAsync();
+
+            return tutores.Select(t => new TutorDto
+            {
+                Id = t.Id,
+                Nome = t.Nome,
+                Email = t.Email,
+                WhatsApp = t.WhatsApp,
+                StatusAprovacao = t.StatusAprovacao.ToString(),
+                TotalCursos = t.Cursos.Count,
                 CriadoEm = t.CriadoEm
             }).ToList();
         }
